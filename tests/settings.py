@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'openwisp_users',
     'openwisp_controller.pki',
     'openwisp_controller.config',
+    'openwisp_controller.connectors',
     # admin
     'django.contrib.admin',
     # other dependencies
@@ -94,6 +95,36 @@ TEMPLATES = [
 EMAIL_PORT = '1025'  # for testing purposes
 LOGIN_REDIRECT_URL = 'admin:index'
 ACCOUNT_LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL
+
+LOGGING = {
+    'version': 1,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        }
+    }
+}
+
+NETJSONCONFIG_BACKENDS = (
+    ('netjsonconfig.OpenWrt', 'OpenWRT/LEDE'),
+    ('netjsonconfig.OpenWisp', 'OpenWISP Firmware 1.x'),
+    # uncomment the backend
+    # ('netjsonconfig.AirOs', 'Ubiquiti AirOS'),
+    # ('netjsonconfig.Raspbian', 'Raspberry PI (raspbian)'),
+)
 
 # local settings must be imported before test runner otherwise they'll be ignored
 try:
