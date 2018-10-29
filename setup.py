@@ -37,7 +37,11 @@ setup(
         "django-netjsonconfig>=0.8.1,<0.10.0",
         "openwisp-utils[users]<0.3",
         "django-loci>=0.1.1,<0.3.0",
+<<<<<<< 3f94e2e341a3abc8e0bf837d6483a641d3efc2ed
         "djangorestframework-gis>=0.12.0,<0.14.0"
+=======
+        "djangorestframework-gis>=0.12.0,<0.14.0",
+>>>>>>> [qa] Reconfigured flake8 to avoid new warnings in 3.6.0
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
