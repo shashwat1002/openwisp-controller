@@ -1,7 +1,7 @@
 from django.db import migrations 
 from django.contrib.auth.models import Permission
 from django.contrib.auth.management import create_permissions 
-
+from django.db import transaction
 
 def make_default_permissions_in_code(apps, schema_editor):
     for app_config in apps.get_app_configs():
@@ -30,8 +30,15 @@ def assignPerm(apps, schema_editor):
     for i in operators_and_admins_can_change:
         for j in manage_operations:
             permission=Permission.objects.get(codename="{}_{}".format(j,i))
-            admin.permissions.add(permission)
-            operator.permissions.add(permission)
+            try:
+                with transaction.atomic():
+
+                    admin.permissions.add(permission)
+                    operator.permissions.add(permission)
+            except TypeError:
+                print ("error ")
+                print(permission)
+
     for i in operators_read_only_admins_manage:
         try:
             permission=Permission.objects.get(codename="view_{}".format(i))
@@ -48,6 +55,7 @@ class Migration(migrations.Migration):
         ('openwisp_users', '__first__'),
         ('openwisp_users', '0004_default_groups'),
         ('pki', '__first__'),
+  #      ('django_loci', '__first__'),
         ('config', '0010_auto_20180106_1814'),
         
     ]
