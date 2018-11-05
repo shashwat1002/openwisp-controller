@@ -30,14 +30,10 @@ def assignPerm(apps, schema_editor):
     for i in operators_and_admins_can_change:
         for j in manage_operations:
             permission=Permission.objects.get(codename="{}_{}".format(j,i))
-            try:
-                with transaction.atomic():
 
-                    admin.permissions.add(permission)
-                    operator.permissions.add(permission)
-            except TypeError:
-                print ("error ")
-                print(permission)
+            admin.permissions.add(permission)
+            operator.permissions.add(permission)
+            
 
     for i in operators_read_only_admins_manage:
         try:
