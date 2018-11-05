@@ -43,7 +43,7 @@ class DeviceAdmin(MultitenantAdminMixin, AbstractDeviceAdmin):
         if django_netjsonconfig_settings.BACKEND_DEVICE_LIST:
             list_filter.insert(1, 'config__backend')
     except AttributeError:
-        pass        
+        pass
     list_select_related = ('config', 'organization')
 
     def _get_default_template_urls(self):
