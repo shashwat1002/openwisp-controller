@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
         ('openwisp_users', '0004_default_groups'),
         ('pki', '__first__'),
   #      ('django_loci', '__first__'),
-        ('config', '0013_auto_20180106_1814'),
+        ('config', '0013_last_ip_management_ip_and_status_applied'),
         
     ]
 
