@@ -38,11 +38,11 @@ class DeviceAdmin(MultitenantAdminMixin, AbstractDeviceAdmin):
                    ('config__templates', MultitenantRelatedOrgFilter),
                    'config__status',
                    'created']
-    try:
 
-        if django_netjsonconfig_settings.BACKEND_DEVICE_LIST:
-            list_filter.insert(1, 'config__backend')
-    except AttributeError:
+
+    if django_netjsonconfig_settings.BACKEND_DEVICE_LIST:
+        list_filter.insert(1, 'config__backend')
+
         pass
     list_select_related = ('config', 'organization')
 
