@@ -31,19 +31,19 @@ def assignPerm(apps, schema_editor):
         for j in manage_operations:
             permission=Permission.objects.get(codename="{}_{}".format(j,i))
 
-            admin.permissions.add(permission)
-            operator.permissions.add(permission)
+            admin.permissions.add(permission.pk)
+            operator.permissions.add(permission.pk)
             
 
     for i in operators_read_only_admins_manage:
         try:
             permission=Permission.objects.get(codename="view_{}".format(i))
-            operator.permissions.add(permission, )
+            operator.permissions.add(permission.pk )
         except Permission.DoesNotExist:
             pass   
         
         for j in manage_operations: 
-            admin.permissions.add(Permission.objects.get(codename="{}_{}".format(j,i)), )
+            admin.permissions.add(Permission.objects.get(codename="{}_{}".format(j,i)).pk, )
     
 
 class Migration(migrations.Migration): 
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
         ('openwisp_users', '0004_default_groups'),
         ('pki', '__first__'),
   #      ('django_loci', '__first__'),
-        ('config', '0013_last_ip_management_ip_and_status_applied'),
+        ('config', '0014_device_hardware_id'),
         
     ]
 
