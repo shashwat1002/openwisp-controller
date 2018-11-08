@@ -38,6 +38,7 @@ setup(
         "openwisp-utils[users]<0.3",
         "django-loci>=0.1.1,<0.3.0",
         "djangorestframework-gis>=0.12.0,<0.14.0"
+        "django>=2.1",
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
