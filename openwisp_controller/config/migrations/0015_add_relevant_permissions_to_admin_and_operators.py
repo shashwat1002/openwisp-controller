@@ -4,6 +4,7 @@ from django.contrib.auth.management import create_permissions
 from django.db import transaction
 
 
+
 def make_default_permissions_in_code(apps, schema_editor):
     for app_config in apps.get_app_configs():
         app_config.models_module = True 
@@ -50,7 +51,7 @@ class Migration(migrations.Migration):
         ('openwisp_users', '__first__'),
         ('openwisp_users', '0004_default_groups'),
         ('pki', '__first__'),
-#        ('django_loci', '__first__'),
+        ('geo', '__first__'),
         ('config', '0014_device_hardware_id'),
         
     ]
