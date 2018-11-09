@@ -64,13 +64,13 @@ Alternatively you can install via pip using git:
 
     pip install -e git+git://github.com/openwisp/openwisp-controller#egg=openwisp_controller
 
-If you want to contribute, install your cloned fork:
+If you want to contribute, install your cloned fork with `pipenv <https://pipenv.readthedocs.io/en/latest/>`_:
 
 .. code-block:: shell
 
     git clone git@github.com:<your_fork>/openwisp-controller.git
     cd openwisp_controller
-    python setup.py develop
+    pipenv install --dev
 
 Setup (integrate in an existing django project)
 -----------------------------------------------
@@ -200,36 +200,30 @@ Install sqlite:
 
 .. code-block:: shell
 
-    sudo apt-get install sqlite3 libsqlite3-dev openssl libssl-dev
+    sudo apt-get install sqlite3 libsqlite3-dev libsqlite3-mod-spatialite openssl libssl-dev
     sudo apt-get install gdal-bin libproj-dev libgeos-dev libspatialite-dev
 
-Install your forked repo:
+Install your forked repo with `pipenv <https://pipenv.readthedocs.io/en/latest/>`_:
 
 .. code-block:: shell
 
     git clone git://github.com/<your_fork>/openwisp-controller
     cd openwisp-controller/
-    python setup.py develop
-
-Install test requirements:
-
-.. code-block:: shell
-
-    pip install -r requirements-test.txt
+    pipenv install --dev
 
 Create database:
 
 .. code-block:: shell
 
     cd tests/
-    ./manage.py migrate
-    ./manage.py createsuperuser
+    pipenv run ./manage.py migrate
+    pipenv run ./manage.py createsuperuser
 
 Launch development server:
 
 .. code-block:: shell
 
-    ./manage.py runserver 0.0.0.0:8000
+    pipenv run ./manage.py runserver 0.0.0.0:8000
 
 You can access the admin interface at http://127.0.0.1:8000/admin/.
 
@@ -237,7 +231,7 @@ Run tests with:
 
 .. code-block:: shell
 
-    ./runtests.py
+    pipenv run ./runtests.py
 
 Install and run on docker
 --------------------------
@@ -253,6 +247,29 @@ Run the docker container:
 .. code-block:: shell
 
    sudo docker run -it -p 8000:8000 openwisp/controller
+   
+Troubleshooting Steps
+---------------------
+
+You may encounter some issues while installing GeoDjango.
+
+Unable to load SpatiaLite library extension?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you are getting below exception::
+
+   django.core.exceptions.ImproperlyConfigured: Unable to load the SpatiaLite library extension
+
+then, You need to specify ``SPATIALITE_LIBRARY_PATH`` in your ``settings.py`` as explained in 
+`django documentation regarding how to install and configure spatialte
+<https://docs.djangoproject.com/en/2.1/ref/contrib/gis/install/spatialite/>`_.
+
+Having Issues with other geospatial libraries?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Please refer 
+`troubleshooting issues related to geospatial libraries
+<https://docs.djangoproject.com/en/2.1/ref/contrib/gis/install/#library-environment-settings/>`_.
 
 Talks
 -----
